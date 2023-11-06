@@ -4,8 +4,8 @@
 #define TF 500
 int main()
 {
-	int  TLA=0, i, vCod[TF], j= 0, TLD= 0, cod=0;
-	char op, nome[30], vAluno[TF][30],vRA[TF][15], RA[15], vDisciplina[TF][30];
+	int  TLA=0, i, j= 0, TLD= 0;
+	char op, nome[30], vAluno[TF][30],vRA[TF][15], RA[15], vDisciplina[TF][30], cod[15], vCod[TF][30];
 	
 		printf(" **** SISTEMA ****\n");
 	
@@ -14,6 +14,10 @@ int main()
 		printf("\nCadastro de Aluno [A]\n");
 		printf("Cadastro de Disciplina [B]\n");
 		printf("Lancar Notas [C]\n");
+		printf("Excluir Aluno [D]\n");
+		printf("Relatorio de Notas [E]\n");
+		printf("Relatorio Alunos Aprovados [F]\n");
+		printf("Relatorio Alunos Reprovados [G]\n");
 		printf("\nDigite a opcao abaixo:\n");
 		fflush(stdin);
 		scanf("%c",&op);
@@ -62,37 +66,60 @@ int main()
 			case 'B':
 				
 				printf("Digite o codigo da disciplina:\n");
-				scanf("%d",&cod);	
-				while(cod != 0)//meu 'j' é minha variavel de controle
-				{
+				fflush(stdin);
+				gets(cod);
+				
+			
 					j= 0;
-					while(j< TLD && cod!= vCod[j])
+					
+					
+					while(j < TLD && strcmp(vCod[j],cod) != 0)
 						j++;	
+						
+						
 					if(j == TLD)
 					{
 						printf("Digite o nome da disciplina:\n");
 						fflush(stdin);
-						strupr(gets(vDisciplina[TLD]));
-						vCod[TLD]= cod;
+						gets(vDisciplina[TLD]);
+						strcpy(vCod[TLD], cod);
 			 			TLD++;
 					}	
 					else
+					{
 						printf(" ** Disciplina Cadastrada **\n");
+						printf("Codigo: %s\n",vCod[j]);
+						printf("Disciplina: %s\n\n",vDisciplina[j]);
 					
-						
-					printf("Digite o codigo da disciplina:\n");
-					scanf("%d", &cod);
-				}
+					}
 				break;
 				
 				
 			case 'C':
 				break;
+				
+				
+			case 'D':
+				break;
+				
+			
+			case 'E':
+				break;
+				
+				
+			case 'F':
+				break;
+				
+				
+			case 'G':
+				break;
+				
+			
 		}
 	
 	
 	}while(op != 27);
 	
-	
+	return 0;
 	
 }
