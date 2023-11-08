@@ -5,13 +5,13 @@
 #define TF 500
 int main()
 {
-	int  TLA=0, i, j= 0, TLD= 0, TLN= 0;
-	char  op, nome[30], vAluno[TF][30],vRA[TF][15], RA[15], vDisciplina[TF][30], cod[15], vCod[TF][30], vRA_mat[TF][30], vCod_mat[TF][30], vNota1[TF][30], vNota2[TF][30], nota1[20], nota2[20];
+	int  TLA=0, i, j= 0, TLD= 0, TLN= 0, controle,nota1[TF], nota2[TF];
+	char  op, nome[30], vAluno[TF][30],vRA[TF][15], RA[15], vDisciplina[TF][30], cod[15], vCod[TF][30], vRA_mat[TF][30], vCod_mat[TF][30];
 	
 		printf(" **** SISTEMA ****\n");
 	
 	do {
-		printf(" ----------------------------\n");
+		printf("\n\n ----------------------------\n");
 		printf("\n Cadastro de Aluno [A]\n");
 		printf(" Cadastro de Disciplina [B]\n");
 		printf(" Lancar Notas [C]\n");
@@ -102,18 +102,12 @@ int main()
 				
 				
 			case 'C':
-				
 				printf(" **** LANCAMENTO DE NOTAS ****\n\n");
 				printf("Informe o RA:\n");
 				fflush(stdin);
 				gets(RA);
-				printf("Informe o codigo da disciplina:\n");
-				fflush(stdin);
-				gets(cod);
 				
 				i=0;
-				j=0;
-				
 				while(i < TLA && strcmp(vRA[i],RA) != 0) 
 					i++;
 					
@@ -123,47 +117,56 @@ int main()
 					printf("\nRA: %s\n", vRA[i]);
 					printf("Aluno: %s\n\n",vAluno[i]);
 				
+					printf("Informe o codigo da disciplina:\n");
+					fflush(stdin);
+					gets(cod);
+					
+					j=0;
+					while(j < TLD && strcmp(vCod[j],cod) != 0)
+						j++;
+				
+					if( j < TLD) {
+						
+						printf(" \n**** DISCIPLINA ****\n");	
+						printf("Codigo: %s\n",vCod[j]);
+						printf("Disciplina: %s\n\n",vDisciplina[j]);
+						
+						i = 0;
+						controle = 0; // variável para quebrar a repetição!
+						
+						while(i < TLN && controle != 1)
+						{
+							if(strcmp(vRA_mat[i],RA)==0 && strcmp(vCod_mat[i],cod)==0) // naquela posição i do vetor eu achei o RA e o cod da matéria, então nota ja lançada
+								controle = 1; // mudo para quebrar condição do while
+							else
+								i++; // se não achar, acrescento i
+						}
+							
+						if(i < TLN) {
+							printf("\n **** NOTA JA CADASTRADA ****\n\n");
+							printf("\n **** NOTA 1 : %d ",nota1[i]);
+							printf("\n **** NOTA 2 : %d ",nota2[i]);
+						}
+						else {
+							
+							printf("Insira a nota do primeiro bimestre:\n");
+							scanf("%d",&nota1[TLN]);                         // mudei vetor de notas para int
+							
+							printf("Insira a nota do segundo bimestre:\n");
+							scanf("%d",&nota2[TLN]);
+							
+							strcpy(vRA_mat[TLN],RA);           // registrando que esse aluno já lancou a nota
+							strcpy(vCod_mat[TLN],cod);         // na disciplina
+							
+							TLN++;
+				
+						}
+					}
+					else
+						printf(" ** DISCIPLINA NAO ENCONTRADA **\n\n");		
 				}
 				else
-					printf("\n ** NOTA JA LANCADA **\n\n");
-				
-				while(j < TLA && strcmp(vCod[j],cod) != 0)
-					j++;
-				
-				if( j < TLD) {
-					
-					printf(" \n**** DISCIPLINA ****\n");	
-					printf("Codigo: %s\n",vCod[j]);
-					printf("Disciplina: %s\n\n",vDisciplina[j]);
-				}
-				else
-					printf(" ** NOTA JA LANCADA **\n\n");
-					
-					
-				i = 0;
-					
-				while(i < TLA && strcmp(vRA_mat[i], RA) != 0)
-					i++;
-					
-				if(i < TLA) 
-					printf("\n **** NOTA JA CADASTRADA ****\n\n");
-			
-				
-				 {
-					
-					printf("Insira a nota do primeiro bimestre:\n");
-					fflush(stdin);
-					gets(nota1);
-					strcpy(vNota1[TLN], nota1);
-					
-					printf("Insira a nota do segundo bimestre:\n");
-					fflush(stdin);
-					gets(nota2);
-					strcpy(vNota2[TLN], nota2);
-					
-					TLN++;
-		
-				}
+					printf("\n ** ALUNO NAO ENCONTRADO **\n\n");
 				
 				break;
 				
@@ -192,3 +195,4 @@ int main()
 
 	return 0;
 	
+}
