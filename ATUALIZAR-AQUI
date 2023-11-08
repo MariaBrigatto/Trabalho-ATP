@@ -5,8 +5,8 @@
 #define TF 500
 int main()
 {
-	int  TLA=0, i, j= 0, TLD= 0, TLN= 0, controle,nota1[TF], nota2[TF];
-	char  op, nome[30], vAluno[TF][30],vRA[TF][15], RA[15], vDisciplina[TF][30], cod[15], vCod[TF][30], vRA_mat[TF][30], vCod_mat[TF][30];
+	int  TLA=0, i, j= 0, TLD= 0, TLN= 0, controle, vNota1[TF], vNota2[TF], e = 0;
+	char  op, nome[30], vAluno[TF][30],vRA[TF][15], RA[15], vDisciplina[TF][30], cod[15], vCod[TF][30], vRA_mat[TF][30], vCod_mat[TF][30], excluir;
 	
 		printf(" **** SISTEMA ****\n");
 	
@@ -144,16 +144,16 @@ int main()
 							
 						if(i < TLN) {
 							printf("\n **** NOTA JA CADASTRADA ****\n\n");
-							printf("\n **** NOTA 1 : %d ",nota1[i]);
-							printf("\n **** NOTA 2 : %d ",nota2[i]);
+							printf("\n **** NOTA 1 : %d ",vNota1[i]);
+							printf("\n **** NOTA 2 : %d ",vNota2[i]);
 						}
 						else {
 							
 							printf("Insira a nota do primeiro bimestre:\n");
-							scanf("%d",&nota1[TLN]);                         // mudei vetor de notas para int
+							scanf("%d",&vNota1[TLN]);                         // mudei vetor de notas para int
 							
 							printf("Insira a nota do segundo bimestre:\n");
-							scanf("%d",&nota2[TLN]);
+							scanf("%d",&vNota2[TLN]);
 							
 							strcpy(vRA_mat[TLN],RA);           // registrando que esse aluno já lancou a nota
 							strcpy(vCod_mat[TLN],cod);         // na disciplina
@@ -172,6 +172,66 @@ int main()
 				
 				
 			case 'D':
+				
+				printf("\n **** EXCLUSAO DE ALUNO ****\n\n");
+				printf("Informe o RA:\n");
+				fflush(stdin);
+				gets(RA);
+				
+				i = 0;
+				
+				while(i < TLA && strcmp(vRA[i], RA) != 0) 	
+					i++;
+					
+				if(i < TLA) {
+					
+					printf("Excluir [RA: %s | Aluno: %s ] [S|N]\n");
+					fflush(stdin);
+					scanf("%c",&excluir);
+					excluir = toupper(excluir);
+					
+					if(excluir == 'S') {
+						
+						for(i = i; i < TLA - 1; i++) {
+							
+							printf("for1\n");
+							
+							strcpy(vRA[i], vRA[i+1]);
+							strcpy(vAluno[i], vAluno[i+1]);
+							
+						}
+						for(i = 0; i < TLN - 1; i++) {
+							
+							printf("for2\n");
+							
+							if(strcmp(vRA_mat[i], RA) == 0) {
+								
+								for( e = i; e < TLN - 1 ; e++) {
+									
+									printf("for3\n");
+															
+									vNota1[e] = vNota1[i+1];
+									vNota2[e] = vNota2[i+1];
+									strcpy(vRA_mat[e], vRA_mat[i+1]);
+									strcpy(vCod_mat[e], vCod_mat[i+1]);
+								
+								}
+								
+								TLN--;
+								
+							}	
+						}
+	
+							TLA --;
+							
+					}
+					
+					
+				}
+				else
+					printf("\n **** ALUNO NAO ENCONTRADO! **** \n\n");
+					
+				
 				break;
 				
 			
