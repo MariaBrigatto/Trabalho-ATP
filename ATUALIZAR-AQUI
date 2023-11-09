@@ -7,12 +7,13 @@ int main()
 {
 	int  TLA=0, i, j= 0, TLD= 0, TLN= 0, controle, e = 0;
 	float  vNota1[TF], vNota2[TF];
-	char  op, nome[30], vAluno[TF][30],vRA[TF][15], RA[15], vDisciplina[TF][30], cod[15], vCod[TF][30], vRA_mat[TF][30], vCod_mat[TF][30];
-	
-		printf(" **** SISTEMA ****\n");
+	char  op, nome[30], vAluno[TF][30],vRA[TF][15], RA[15], vDisciplina[TF][30], cod[15], vCod[TF][30], vRA_mat[TF][30], vCod_mat[TF][30];		
 	
 	do {
-		printf("\n ----------------------------\n");
+		
+		printf("----------------------------\n");
+		printf(" **** SISTEMA ****");
+		printf("\n----------------------------\n");
 		printf("\n Cadastro de Aluno [A]\n");
 		printf(" Cadastro de Disciplina [B]\n");
 		printf(" Lancar Notas [C]\n");
@@ -20,12 +21,13 @@ int main()
 		printf(" Relatorio de Notas [E]\n");
 		printf(" Relatorio Alunos Aprovados [F]\n");
 		printf(" Relatorio Alunos Reprovados [G]\n");
+		printf(" Sair [S]\n");
 		printf("\n Digite a opcao abaixo:\n ");
 		fflush(stdin);
 		scanf("%c",&op);
 		op = toupper(op);
 		
-		printf(" \n----------------------------\n\n");
+		printf("\n----------------------------\n\n");
 	
 		system("cls"); // LIMPA A TELA DO MENU  *MENOS POLUIÇÃO VISUAL
 		switch(op) {
@@ -64,7 +66,8 @@ int main()
 						
 					TLA++;
 				
-				}			
+				}	
+						
 				break;
 
 
@@ -98,7 +101,7 @@ int main()
 						printf("Disciplina: %s\n\n",vDisciplina[j]);
 					
 					}
-					
+				
 				break;
 				
 				
@@ -168,7 +171,8 @@ int main()
 				}
 				else
 					printf("\n ** ALUNO NAO ENCONTRADO **\n\n"); // NAO ACHOU
-				
+					
+			
 				break;
 				
 				
@@ -223,11 +227,19 @@ int main()
 								TLA --;
 								
 						}
+						else {
+							
+							if(op == 'N')
+								printf("\n **** EXCLUSAO CANCELADA! ****\n\n");
+							else
+								printf("\n **** OPERACAO DESCONHECIDA! ****\n\n");
+						}
 						
 						
 					}
 					else
 						printf("\n **** ALUNO NAO ENCONTRADO! **** \n\n"); //NAO ACHOU!
+					
 															
 					break;
 					
@@ -243,11 +255,12 @@ int main()
 			case 'G':
 				break;
 				
-			
+				
+			default: printf("\n **** OPERACAO INVALIDA/FINALIZADA! ****\n\n");
 		}
 	
 	
-	}while(op != 27);
+	}while(op != 'S');
 	
 
 	return 0;
