@@ -7,7 +7,7 @@ int main()
 {
 	int  TLA=0, i, j= 0, TLD= 0, TLN= 0, controle, e = 0;
 	float  vNota1[TF], vNota2[TF];
-	char  op, nome[30], vAluno[TF][30],vRA[TF][15], RA[15], vDisciplina[TF][30], cod[15], vCod[TF][30], vRA_mat[TF][30], vCod_mat[TF][30], excluir;
+	char  op, nome[30], vAluno[TF][30],vRA[TF][15], RA[15], vDisciplina[TF][30], cod[15], vCod[TF][30], vRA_mat[TF][30], vCod_mat[TF][30];
 	
 		printf(" **** SISTEMA ****\n");
 	
@@ -27,7 +27,7 @@ int main()
 		
 		printf(" \n----------------------------\n\n");
 	
-		system("cls"); // LIMPA A TELA DO MENU MENOS POLUIÇÃO VISUAL
+		system("cls"); // LIMPA A TELA DO MENU  *MENOS POLUIÇÃO VISUAL
 		switch(op) {
 			
 			case 'A': // CADASTRO DE ALUNO
@@ -181,57 +181,56 @@ int main()
 				
 				i = 0;
 				
-				while(i < TLA && strcmp(vRA[i], RA) != 0) {	// BUSCA DO RA
-					i++;
-				}
-					
-				if(i < TLA) { //ACHOU 
-					
-					printf("Excluir [RA: %s | Aluno: %s ] [S|N]\n"); // CONFIRMAÇÃO DE EXCLUSÃO
-					fflush(stdin);
-					scanf("%c",&excluir);
-					excluir = toupper(excluir);
-					
-					if(excluir == 'S') {
+					while(i < TLA && strcmp(vRA[i], RA) != 0) 	// BUSCA DO RA
+						i++;
 						
-						for(i = i; i < TLA - 1; i++) { // REMANEJAMENTO DO RA (EXCLUSÃO)
+					if(i < TLA) { //ACHOU 
+						
+						printf("Excluir [RA: %s | Aluno: %s ] [S|N]\n",vRA[i],vAluno[i]); // CONFIRMAÇÃO DE EXCLUSÃO
+						fflush(stdin);
+						scanf("%c",&op);
+						op = toupper(op);
+						
+						if(op == 'S') {
 							
-							strcpy(vRA[i], vRA[i+1]);
-							strcpy(vAluno[i], vAluno[i+1]);
-							
-						}
-						for(i = 0; i < TLN; i++) { 
-													
-							if(strcmp(vRA_mat[i], RA) == 0) {
+							for(i = i; i < TLA - 1; i++) { // REMANEJAMENTO DO RA (EXCLUSÃO)
 								
-								for( e = i; e < TLN - 1 ; e++) { //// REMANEJAMENTO DAS NOTAS E NO VETOR DE CONTROLE (EXCLUSÃO) || "e" VARIAVEL DE CONTROLE NOVA!
-																								
-									vNota1[e] = vNota1[e+1];
-									vNota2[e] = vNota2[e+1];
-									strcpy(vRA_mat[e], vRA_mat[e+1]);
-									strcpy(vCod_mat[e], vCod_mat[e+1]);
-								
-								}
-								
-								TLN--;
+								strcpy(vRA[i], vRA[i+1]);
+								strcpy(vAluno[i], vAluno[i+1]);
 								
 							}
-							
-						printf("\n **** EXCLUSÃO CONCLUIDA! ****\n\n");	
-							
-						}
-							
-							TLA --;
-							
-					}
-					
-					
-				}
-				else
-					printf("\n **** ALUNO NAO ENCONTRADO! **** \n\n"); //NAO ACHOU!
+							for(i = 0; i < TLN; i++) { 
 														
-				break;
-				
+								if(strcmp(vRA_mat[i], RA) == 0) {
+									
+									for( e = i; e < TLN - 1 ; e++) { //// REMANEJAMENTO DAS NOTAS NO VETOR DE CONTROLE (EXCLUSÃO) || "e" VARIAVEL DE CONTROLE NOVA!
+																									
+										vNota1[e] = vNota1[e+1];
+										vNota2[e] = vNota2[e+1];
+										strcpy(vRA_mat[e], vRA_mat[e+1]);
+										strcpy(vCod_mat[e], vCod_mat[e+1]);
+									
+									}
+									
+								TLN--;
+									
+								}
+								
+							printf("\n **** EXCLUSAO CONCLUIDA! ****\n\n");	
+								
+							}
+								
+								TLA --;
+								
+						}
+						
+						
+					}
+					else
+						printf("\n **** ALUNO NAO ENCONTRADO! **** \n\n"); //NAO ACHOU!
+															
+					break;
+					
 			
 			case 'E':
 				break;
