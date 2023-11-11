@@ -189,13 +189,6 @@ int main()
 						i++;
 						
 					if(i < TLA) { //ACHOU 
-						
-						printf("Excluir [RA: %s | Aluno: %s ] [S|N]\n",vRA[i],vAluno[i]); // CONFIRMAÇÃO DE EXCLUSÃO
-						fflush(stdin);
-						scanf("%c",&op);
-						op = toupper(op);
-						
-						if(op == 'S') {
 							
 							for(i = i; i < TLA - 1; i++) { // REMANEJAMENTO DO RA (EXCLUSÃO)
 								
@@ -227,18 +220,10 @@ int main()
 								TLA --;
 								
 						}
-						else {
-							
-							if(op == 'N')
-								printf("\n **** EXCLUSAO CANCELADA! ****\n\n");
-							else
-								printf("\n **** OPERACAO DESCONHECIDA! ****\n\n");
-						}
-						
-						
-					}
-					else
-						printf("\n **** ALUNO NAO ENCONTRADO! **** \n\n"); //NAO ACHOU!
+						else
+							printf("\n **** ALUNO NAO ENCONTRADO! **** \n\n"); //NAO ACHOU!
+					
+				
 					
 															
 					break;
