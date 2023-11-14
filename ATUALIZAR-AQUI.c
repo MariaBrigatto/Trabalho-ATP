@@ -21,6 +21,7 @@ int main()
 		printf(" Relatorio de Notas [E]\n");
 		printf(" Relatorio Alunos Aprovados [F]\n");
 		printf(" Relatorio Alunos Reprovados [G]\n");
+		printf(" Registros [H]\n");
 		printf(" Sair [S]\n");
 		printf("\n Digite a opcao abaixo:\n ");
 		fflush(stdin);
@@ -189,6 +190,13 @@ int main()
 						i++;
 						
 					if(i < TLA) { //ACHOU 
+						
+						printf("Excluir [RA: %s | Aluno: %s ] [S|N]\n",vRA[i],vAluno[i]); // CONFIRMAÇÃO DE EXCLUSÃO
+						fflush(stdin);
+						scanf("%c",&op);
+						op = toupper(op);
+						
+						if(op == 'S') {
 							
 							for(i = i; i < TLA - 1; i++) { // REMANEJAMENTO DO RA (EXCLUSÃO)
 								
@@ -220,16 +228,45 @@ int main()
 								TLA --;
 								
 						}
-						else
-							printf("\n **** ALUNO NAO ENCONTRADO! **** \n\n"); //NAO ACHOU!
-					
-				
+						else {
+							
+							if(op == 'N')
+								printf("\n **** EXCLUSAO CANCELADA! ****\n\n");
+							else
+								printf("\n **** OPERACAO DESCONHECIDA! ****\n\n");
+						}
+						
+						
+					}
+					else
+						printf("\n **** ALUNO NAO ENCONTRADO! **** \n\n"); //NAO ACHOU!
 					
 															
 					break;
 					
 			
 			case 'E':
+				printf("\tlistagem de nota\n");
+				for(j=0;j<TLA;j++)
+				{
+					printf("Aluno: %s -%s\n",vRA[j],vAluno[j]);
+					i=0;
+					while(i<TLN && strcmp(vRA[j],vRA_mat)!=0)
+						i++;
+					if(i==TLN)
+						printf("Nao achou\n");
+					else
+						for(e=3;e>0;e--)
+						{
+							printf("disciplina: %s - %s     nota 1 : %.2f   nota 2 : %.2f   media : %.2f\n", vCod[i], vDisciplina[i], vNota1[i], vNota2[i], (vNota1[i]+vNota2[i])/2);
+							i++;
+						}
+						
+					
+					
+				}
+				getch();
+				
 				break;
 				
 				
@@ -240,13 +277,50 @@ int main()
 			case 'G':
 				break;
 				
+			case 'H':
+				
+				strcpy(vRA[TLA],"1111");
+				strcpy(vAluno[TLA],"joao");
+				TLA++;
+				
+				strcpy(vCod[TLD],"10");
+				strcpy(vDisciplina[TLD],"calculo I");
+				TLD++;
+				
+				strcpy(vCod[TLD],"20");
+				strcpy(vDisciplina[TLD],"calculo II");
+				TLD++;
+				
+				strcpy(vCod[TLD],"30");
+				strcpy(vDisciplina[TLD],"ATP I");
+				TLD++;
+				
+				strcpy(vRA_mat[TLN],"1111");
+				strcpy(vCod_mat[TLN],"10");
+				vNota1[TLN]=5.6;
+				vNota2[TLN]=7.4;
+				TLN++;
+				
+				strcpy(vRA_mat[TLN],"1111");
+				strcpy(vCod_mat[TLN],"20");
+				vNota1[TLN]=7;
+				vNota2[TLN]=4;
+				TLN++;
+				
+				strcpy(vRA_mat[TLN],"1111");
+				strcpy(vCod_mat[TLN],"30");
+				vNota1[TLN]=8;
+				vNota2[TLN]=10;
+				TLN++;
+				
+				break;
+				
 				
 			default: printf("\n **** OPERACAO INVALIDA/FINALIZADA! ****\n\n");
 		}
 	
 	
 	}while(op != 'S');
-	
 
 	return 0;
 	
