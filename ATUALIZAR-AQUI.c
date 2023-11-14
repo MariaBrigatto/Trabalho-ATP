@@ -277,44 +277,6 @@ int main()
 			case 'G':
 				break;
 				
-			case 'H':
-				
-				strcpy(vRA[TLA],"1111");
-				strcpy(vAluno[TLA],"joao");
-				TLA++;
-				
-				strcpy(vCod[TLD],"10");
-				strcpy(vDisciplina[TLD],"calculo I");
-				TLD++;
-				
-				strcpy(vCod[TLD],"20");
-				strcpy(vDisciplina[TLD],"calculo II");
-				TLD++;
-				
-				strcpy(vCod[TLD],"30");
-				strcpy(vDisciplina[TLD],"ATP I");
-				TLD++;
-				
-				strcpy(vRA_mat[TLN],"1111");
-				strcpy(vCod_mat[TLN],"10");
-				vNota1[TLN]=5.6;
-				vNota2[TLN]=7.4;
-				TLN++;
-				
-				strcpy(vRA_mat[TLN],"1111");
-				strcpy(vCod_mat[TLN],"20");
-				vNota1[TLN]=7;
-				vNota2[TLN]=4;
-				TLN++;
-				
-				strcpy(vRA_mat[TLN],"1111");
-				strcpy(vCod_mat[TLN],"30");
-				vNota1[TLN]=8;
-				vNota2[TLN]=10;
-				TLN++;
-				
-				break;
-				
 				
 			default: printf("\n **** OPERACAO INVALIDA/FINALIZADA! ****\n\n");
 		}
