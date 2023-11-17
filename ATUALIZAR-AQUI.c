@@ -5,7 +5,7 @@
 #define TF 500
 int main()
 {
-	int  TLA=0, i, j= 0, TLD= 0, TLN= 0, controle, e = 0;
+	int  TLA=0, i, j,k, TLD= 0, TLM= 0, controle, e = 0;
 	float  vNota1[TF], vNota2[TF];
 	char  op, nome[30], vAluno[TF][30],vRA[TF][15], RA[15], vDisciplina[TF][30], cod[15], vCod[TF][30], vRA_mat[TF][30], vCod_mat[TF][30];		
 	
@@ -14,16 +14,15 @@ int main()
 		printf("----------------------------\n");
 		printf(" **** SISTEMA ****");
 		printf("\n----------------------------\n");
-		printf("\n Cadastro de Aluno [A]\n");
-		printf(" Cadastro de Disciplina [B]\n");
-		printf(" Lancar Notas [C]\n");
-		printf(" Excluir Aluno [D]\n");
-		printf(" Relatorio de Notas [E]\n");
-		printf(" Relatorio Alunos Aprovados [F]\n");
-		printf(" Relatorio Alunos Reprovados [G]\n");
-		printf(" Registros [H]\n");
-		printf(" Sair [S]\n");
-		printf("\n Digite a opcao abaixo:\n ");
+		printf("\n[A] Cadastro de Aluno\n");
+		printf("[B] Cadastro de Disciplina\n");
+		printf("[C] Lancar Notas\n");
+		printf("[D] Excluir Aluno\n");
+		printf("[E] Relatorio de Notas\n");
+		printf("[F] Relatorio Alunos Aprovados\n");
+		printf("[G] Relatorio Alunos Reprovados\n");
+		printf("[S] Sair\n");
+		printf("\nDigite a opcao abaixo:\n");
 		fflush(stdin);
 		scanf("%c",&op);
 		op = toupper(op);
@@ -139,7 +138,7 @@ int main()
 						i = 0;
 						controle = 0; // VARIAVEL PARA QUEBRAR A REPETIÇÃO !
 						
-						while(i < TLN && controle != 1) 
+						while(i < TLM && controle != 1) 
 						{
 							if(strcmp(vRA_mat[i],RA)==0 && strcmp(vCod_mat[i],cod)==0) // ACHOU NA POSIÇÃO i, LOGO, NOTA JA LANÇADA!
 								controle = 1; // QUEBRA DA CONDIÇÃO (WHILE)
@@ -147,7 +146,7 @@ int main()
 								i++; // NAO ACHOU, ACRESCENTO +1!
 						}
 							
-						if(i < TLN) { // ACHOU
+						if(i < TLM) { // ACHOU
 							printf("\n **** NOTA JA CADASTRADA ****\n\n");
 							printf("\n **** NOTA 1 : %f ",vNota1[i]);
 							printf("\n **** NOTA 2 : %f ",vNota2[i]);
@@ -155,15 +154,15 @@ int main()
 						else {
 							
 							printf("Insira a nota do primeiro bimestre:\n");
-							scanf("%f",&vNota1[TLN]);                        
+							scanf("%f",&vNota1[TLM]);                        
 							
 							printf("Insira a nota do segundo bimestre:\n");
-							scanf("%f",&vNota2[TLN]);
+							scanf("%f",&vNota2[TLM]);
 							
-							strcpy(vRA_mat[TLN],RA);         // ACRESCENTA NO VETOR DE CONTROLE DE RA QUE A NOTA JA FOI LANÇADA
-							strcpy(vCod_mat[TLN],cod);       // IDEM PARA O VETOR DE CONTROLE DE DISCIPLINA 
+							strcpy(vRA_mat[TLM],RA);         // ACRESCENTA NO VETOR DE CONTROLE DE RA QUE A NOTA JA FOI LANÇADA
+							strcpy(vCod_mat[TLM],cod);       // IDEM PARA O VETOR DE CONTROLE DE DISCIPLINA 
 							
-							TLN++;
+							TLM++;
 				
 						}
 					}
@@ -204,11 +203,11 @@ int main()
 								strcpy(vAluno[i], vAluno[i+1]);
 								
 							}
-							for(i = 0; i < TLN; i++) { 
+							for(i = 0; i < TLM; i++) { 
 														
 								if(strcmp(vRA_mat[i], RA) == 0) {
 									
-									for( e = i; e < TLN - 1 ; e++) { //// REMANEJAMENTO DAS NOTAS NO VETOR DE CONTROLE (EXCLUSÃO) || "e" VARIAVEL DE CONTROLE NOVA!
+									for( e = i; e < TLM - 1 ; e++) { //// REMANEJAMENTO DAS NOTAS NO VETOR DE CONTROLE (EXCLUSÃO) || "e" VARIAVEL DE CONTROLE NOVA!
 																									
 										vNota1[e] = vNota1[e+1];
 										vNota2[e] = vNota2[e+1];
@@ -217,7 +216,7 @@ int main()
 									
 									}
 									
-								TLN--;
+								TLM--;
 									
 								}
 								
@@ -246,26 +245,25 @@ int main()
 					
 			
 			case 'E':
-				printf("\tlistagem de nota\n");
-				for(j=0;j<TLA;j++)
+				
+				printf("\n **** RELATORIO DE NOTAS ****\n\n");
+				
+				j=0;
+				for(i=0;i<TLA;i++)
 				{
-					printf("Aluno: %s -%s\n",vRA[j],vAluno[j]);
-					i=0;
-					while(i<TLN && strcmp(vRA[j],vRA_mat)!=0)
-						i++;
-					if(i==TLN)
-						printf("Nao achou\n");
-					else
-						for(e=3;e>0;e--)
-						{
-							printf("disciplina: %s - %s     nota 1 : %.2f   nota 2 : %.2f   media : %.2f\n", vCod[i], vDisciplina[i], vNota1[i], vNota2[i], (vNota1[i]+vNota2[i])/2);
-							i++;
-						}
+					printf("RA: [ %s ] | ALUNO: [ %s ]\n\n",vRA[i],vAluno[i]);
+					while(j<TLM && strcmp(vRA[i],vRA_mat[j])==0)
+					{
+						k=0;
+						while(k<TLD&& vCod[k]!=vCod_mat[j])
+							k++;
+						if(k<TLD) 
+							printf("DISCIPLINA: [ %s ] | [ %s ] \n NOTA 1: [ %.2f ] * NOTA 2 : [ %.2f ] | MEDIA: [ %.2f ]\n\n", vCod[k], vDisciplina[k], vNota1[j], vNota2[j], (vNota1[j]+vNota2[j])/2);
+						j++;
 						
+					}
 					
-					
-				}
-				getch();
+				}					
 				
 				break;
 				
