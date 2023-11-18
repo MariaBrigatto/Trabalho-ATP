@@ -6,7 +6,7 @@
 int main()
 {
 	int  TLA=0, i, j,k, TLD= 0, TLM= 0, controle, e = 0;
-	float  vNota1[TF], vNota2[TF];
+	float  vNota1[TF], vNota2[TF], Media;
 	char  op, nome[30], vAluno[TF][30],vRA[TF][15], RA[15], vDisciplina[TF][30], cod[15], vCod[TF][30], vRA_mat[TF][30], vCod_mat[TF][30];		
 	
 	do {
@@ -245,26 +245,23 @@ int main()
 					
 			
 			case 'E':
-				
 				printf("\n **** RELATORIO DE NOTAS ****\n\n");
 				
-				j=0;
-				for(i=0;i<TLA;i++)
-				{
-					printf("RA: [ %s ] | ALUNO: [ %s ]\n\n",vRA[i],vAluno[i]);
-					while(j<TLM && strcmp(vRA[i],vRA_mat[j])==0)
-					{
-						k=0;
-						while(k<TLD&& vCod[k]!=vCod_mat[j])
-							k++;
-						if(k<TLD) 
-							printf("DISCIPLINA: [ %s ] | [ %s ] \n NOTA 1: [ %.2f ] * NOTA 2 : [ %.2f ] | MEDIA: [ %.2f ]\n\n", vCod[k], vDisciplina[k], vNota1[j], vNota2[j], (vNota1[j]+vNota2[j])/2);
-						j++;
+				for(i = 0; i< TLA; i++) {
+					printf("Aluno: %s - %s\n",vRA[i],vAluno[i]);
+					for(j = 0; j < TLM; j++) {
+						if(strcmp(vRA_mat[j],vRA[i]) == 0) {
+							for(e = 0; e < TLD; e++) {
+								if(strcmp(vCod_mat[j],vDisciplina[e]) == 0) 
+									printf("Disciplina: %s - %s   	Nota 1 = %.2f	Nota 2: %.2f	Media: %.2f\n\n",vCod_mat[j],vDisciplina[e],vNota1[j],vNota2[j],(vNota1[j]+vNota2[j])*2);
+							}		
+						}
 						
 					}
 					
-				}					
-				
+					
+					
+				}
 				break;
 				
 				
