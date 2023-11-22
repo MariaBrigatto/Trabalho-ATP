@@ -1,3 +1,4 @@
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -254,7 +255,7 @@ int main()
 							for(e = 0; e < TLD; e++) {
 								if(strcmp(vCod_mat[j],vCod[e]) == 0) {
 								
-									printf("Disciplina: %s - %s   	Nota 1 = %.2f	Nota 2: %.2f	Media: %.2f\n\n",vCod_mat[j],vDisciplina[e],vNota1[j],vNota2[j],(vNota1[j]+vNota2[j])*2);
+									printf("Disciplina: %s - %s   	Nota 1 = %.2f	Nota 2: %.2f	Media: %.2f\n\n",vCod_mat[j],vDisciplina[e],vNota1[j],vNota2[j],(vNota1[j]+vNota2[j])/2);
 									printf("\n\n");
 									
 								}
@@ -264,18 +265,75 @@ int main()
 						}
 						
 					}
-					
-					
-					
+						
 				}
 				break;
 				
 				
 			case 'F':
+				
+				printf(" **** APROVADOS NA DISCIPLINA ****\n\n");
+				
+				printf("Informe o codigo da disciplina:\n");
+				fflush(stdin);
+				gets(cod);
+				
+				for(i = 0; i<TLM; i++) {
+					
+					
+					
+					if(strcmp(vCod_mat[i],cod) == 0 && (vNota1[i]+vNota2[i])/2 >=6 ) {
+						
+							
+						for(j = 0; j< TLA; j++) {
+							
+							
+							if(strcmp(vRA_mat[i],vRA[j]) == 0) 
+							
+								printf("Aluno: %s - %s\n\n",vRA_mat[i],vAluno[j]);
+									
+							
+						}
+							
+					}
+					
+					
+				}
+		
 				break;
 				
 				
 			case 'G':
+				
+				printf(" **** REPROVADOS NA DISCIPLINA ****\n\n");
+				
+				printf("Informe o codigo da disciplina:\n");
+				fflush(stdin);
+				gets(cod);
+				
+				for(i = 0; i<TLM; i++) {
+					
+					
+					
+					if(strcmp(vCod_mat[i],cod) == 0 && (vNota1[i]+vNota2[i])/2 <6 ) {
+						
+							
+						for(j = 0; j< TLA; j++) {
+							
+							
+							if(strcmp(vRA_mat[i],vRA[j]) == 0) 
+							
+								printf("Aluno: %s - %s\n\n",vRA_mat[i],vAluno[j]);
+									
+							
+						}
+							
+					}
+					
+					
+				}
+		
+				
 				break;
 				
 				
