@@ -252,9 +252,15 @@ int main()
 					for(j = 0; j < TLM; j++) {
 						if(strcmp(vRA_mat[j],vRA[i]) == 0) {
 							for(e = 0; e < TLD; e++) {
-								if(strcmp(vCod_mat[j],vDisciplina[e]) == 0) 
+								if(strcmp(vCod_mat[j],vCod[e]) == 0) {
+								
 									printf("Disciplina: %s - %s   	Nota 1 = %.2f	Nota 2: %.2f	Media: %.2f\n\n",vCod_mat[j],vDisciplina[e],vNota1[j],vNota2[j],(vNota1[j]+vNota2[j])*2);
-							}		
+									printf("\n\n");
+									
+								}
+								
+							}
+									
 						}
 						
 					}
